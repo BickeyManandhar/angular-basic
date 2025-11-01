@@ -10,14 +10,25 @@
     </tr>
     </thead>
   <tbody>
-    <tr *ngFor="let salesPerson of salesPersonList" [ngClass]="{'highlight': salesPerson.salesVolume>5000}">
+    <tr *ngFor="let salesPerson of salesPersonList" [ngClass]="{'highlight-green': salesPerson.salesVolume>=7000, 'highlight-orange': salesPerson.salesVolume>=5000 && salesPerson.salesVolume<7000, 'highlight-red': salesPerson.salesVolume<5000}">
       <td>{{ salesPerson.firstName }}</td>
       <td>{{ salesPerson.lastName }}</td>
       <td>{{ salesPerson.email }}</td>
       <td>{{ salesPerson.salesVolume | currency: 'USD' }}</td>
       <td>
-        <div *ngIf="salesPerson.salesVolume > 5000 ; else myElseBlock"> Top Performer </div>
-          <ng-template #myElseBlock> Doing Ok </ng-template>
+        <ng-container *ngIf="salesPerson.salesVolume > 7000; else midPerformer">
+          Top Performer
+        </ng-container>
+
+        <ng-template #midPerformer>
+          <ng-container *ngIf="salesPerson.salesVolume > 5000; else lowPerformer">
+            Doing Good
+          </ng-container>
+        </ng-template>
+
+        <ng-template #lowPerformer>
+          Needs Improvement
+        </ng-template>
       </td>
     </tr>
   </tbody>

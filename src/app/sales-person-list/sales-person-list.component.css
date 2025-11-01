@@ -1,4 +1,14 @@
-    tr.highlight td {
+    tr.highlight-green td {
         background-color: green;
+        font-weight: bold;
+    }
+
+    tr.highlight-orange td {
+        background-color: orange;
+        font-weight: bold;
+    }
+
+    tr.highlight-red td {
+        background-color: red;
         font-weight: bold;
     }
