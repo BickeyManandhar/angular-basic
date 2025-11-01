@@ -6,12 +6,18 @@
       <th>Last Name</th>
       <th>Email</th>
       <th>Sales Amount</th>
+      <th>Performance</th>
     </tr>
     <tr *ngFor="let salesPerson of salesPersonList">
       <td>{{ salesPerson.firstName }}</td>
       <td>{{ salesPerson.lastName }}</td>
       <td>{{ salesPerson.email }}</td>
-      <td>{{ salesPerson.salesVolume }}</td>
+      <td>{{ salesPerson.salesVolume | currency: 'USD' }}</td>
+      <td>
+        <div *ngIf="salesPerson.salesVolume > 5000"; else noTopPerformer>
+          Top Performer
+        </div>
+      </td>
     </tr>
   </thead>
 </table>
